@@ -166,6 +166,10 @@ const CryptoExchange = (() => {
     updateAdditionalFields();
   }
 
+  DOM.confirmButton.addEventListener("click", () => {
+    DOM.buySellAdditionalFields.classList.remove("show");
+    document.querySelector(".overlay-backdrop").style.display = "none";
+  });
   // Initialize custom select components
   function initCustomSelects() {
     // Add click handlers to all custom selects
@@ -258,8 +262,8 @@ const CryptoExchange = (() => {
       if (!e.target.closest(".custom-select")) {
         document.querySelectorAll(".custom-select").forEach((select) => {
           select.classList.remove("open");
-          DOM.buySellAdditionalFields.classList.remove("show");
-          document.querySelector(".overlay-backdrop").style.display = "none";
+          // DOM.buySellAdditionalFields.classList.remove("show");
+          // document.querySelector(".overlay-backdrop").style.display = "none";
         });
       }
     });
