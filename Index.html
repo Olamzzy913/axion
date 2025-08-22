@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Axion Crypto Exchange</title>
+    <link rel="icon" href="./assets/axion_favicon.svg" type="image/svg+xml" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <script src="./assets/scripts.js" defer></script>
+  </head>
+
+  <body>
+    <div class="disclaimer">
+      Don't invest unless you're prepared to lose all the money you invest. This
+      is a high-risk investment and you should not expect to be protected if
+      something goes wrong.
+    </div>
+
+    <div class="card">
+      <!-- Exchange Widget Section -->
+      <div id="exchangeWidget">
+        <div class="card-header">
+          <div class="user-info">
+            <div class="user-name" id="userName">John Smith</div>
+          </div>
+          <div class="profile-icon" id="profileIcon">
+            <i class="fas fa-user"></i>
+          </div>
+        </div>
+
+        <div class="verification-screen">
+          <h2>Verification Required</h2>
+          <p>
+            To complete your transaction, please verify your identity and
+            complete our KYC process.
+          </p>
+          <button id="verifyButton">Continue to Verification</button>
+        </div>
+
+        <div class="tabs">
+          <div class="tab active" data-type="buy">Buy</div>
+          <div class="tab" data-type="sell">Sell</div>
+          <div class="tab" data-type="swap">Swap</div>
+        </div>
+        <div class="content-section">
+          <!-- Buy/Sell Section -->
+          <div id="buySellSection">
+            <div class="currency-selector">
+              <div class="select-container">
+                <div class="custom-select" id="fiatCurrencySelect">
+                  <div class="overlay-backdrop"></div>
+                  <div class="select-header">
+                    <span>
+                      <i class="fas fa-euro-sign"></i>
+                      EUR (€)
+                    </span>
+                    <i class="fas fa-chevron-down"></i>
+                  </div>
+                  <div class="select-options">
+                    <div class="select-option" data-value="gbp">
+                      <i class="fas fa-pound-sign"></i>
+                      GBP (£)
+                    </div>
+                    <div class="select-option active" data-value="eur">
+                      <i class="fas fa-euro-sign"></i>
+                      EUR (€)
+                    </div>
+                    <div class="select-option" data-value="pln">
+                      <i class="fas fa-z"></i>
+                      PLN (zł)
+                    </div>
+                    <div class="select-option" data-value="brl">
+                      <i class="fas fa-r"></i>
+                      BRL (R$)
+                    </div>
+                    <div class="select-option" data-value="mxn">
+                      <i class="fas fa-peso-sign"></i>
+                      MXN ($)
+                    </div>
+                    <div class="select-option" data-value="cop">
+                      <i class="fas fa-peso-sign"></i>
+                      COP ($)
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="select-container">
+                <div class="custom-select" id="cryptoAssetSelect">
+                  <div class="select-header">
+                    <span>
+                      <img
+                        src="https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png"
+                        class="crypto-icon"
+                        width="24"
+                        height="24"
+                      />
+                      USDC
+                    </span>
+                    <i class="fas fa-chevron-down"></i>
+                  </div>
+                  <div class="select-options">
+                    <div class="select-option active" data-value="usdc">
+                      <img
+                        src="https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png"
+                        class="crypto-icon"
+                        width="24"
+                        height="24"
+                      />
+                      USDC
+                    </div>
+                    <div class="select-option" data-value="usdt">
+                      <img
+                        src="https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"
+                        class="crypto-icon"
+                        width="24"
+                        height="24"
+                      />
+                      USDT
+                    </div>
+                    <div class="select-option" data-value="eth">
+                      <img
+                        src="https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"
+                        class="crypto-icon"
+                        width="24"
+                        height="24"
+                      />
+                      ETH
+                    </div>
+                    <div class="select-option" data-value="eurc">
+                      <img
+                        src="https://s2.coinmarketcap.com/static/img/coins/64x64/20641.png"
+                        class="crypto-icon"
+                        width="24"
+                        height="24"
+                      />
+                      EURC
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="buySellAdditionalFields" class="additional-fields">
+              <div class="network-selector">
+                <div class="custom-select" id="networkSelect">
+                  <div class="input-label">
+                    <span>Network</span>
+                  </div>
+                  <div class="select-header">
+                    <span>
+                      <i class="fab fa-ethereum"></i>
+                      Ethereum
+                    </span>
+                    <i class="fas fa-chevron-down"></i>
+                  </div>
+                  <div class="select-options">
+                    <div class="select-option active" data-value="ethereum">
+                      <i class="fab fa-ethereum"></i>
+                      Ethereum
+                    </div>
+                    <div class="select-option" data-value="polygon">
+                      <i class="fas fa-layer-group"></i>
+                      Polygon
+                    </div>
+                    <div class="select-option" data-value="bsc">
+                      <i class="fas fa-link"></i>
+                      Binance Smart Chain
+                    </div>
+                    <div class="select-option" data-value="solana">
+                      <i class="fas fa-bolt"></i>
+                      Solana
+                    </div>
+                  </div>
+                  <div class="error-message" id="networkError">
+                    Please select a network
+                  </div>
+                </div>
+              </div>
+
+              <div id="paymentMethodContainer">
+                <div class="custom-select" id="paymentMethodSelect">
+                  <div class="input-label">
+                    <span>Payment Method</span>
+                  </div>
+                  <div class="select-header">
+                    <span>
+                      <i class="fas fa-university"></i>
+                      IBAN
+                    </span>
+                    <i class="fas fa-chevron-down"></i>
+                  </div>
+                  <div class="select-options">
+                    <div class="select-option active" data-value="iban">
+                      <i class="fas fa-university"></i>
+                      IBAN
+                    </div>
+                    <div class="select-option" data-value="zen">
+                      <i class="fas fa-wallet"></i>
+                      ZEN
+                    </div>
+                    <!-- Additional payment methods will be shown based on currency -->
+                    <div
+                      class="select-option"
+                      data-value="blik"
+                      style="display: none"
+                    >
+                      <i class="fas fa-mobile-alt"></i>
+                      BLIK
+                    </div>
+                    <div
+                      class="select-option"
+                      data-value="spei"
+                      style="display: none"
+                    >
+                      <i class="fas fa-money-check"></i>
+                      SPEI
+                    </div>
+                    <div
+                      class="select-option"
+                      data-value="pix"
+                      style="display: none"
+                    >
+                      <i class="fas fa-barcode"></i>
+                      PIX
+                    </div>
+                    <div
+                      class="select-option"
+                      data-value="pse"
+                      style="display: none"
+                    >
+                      <i class="fas fa-desktop"></i>
+                      PSE
+                    </div>
+                  </div>
+                  <div class="error-message" id="paymentMethodError">
+                    Please select a payment method
+                  </div>
+                </div>
+              </div>
+
+              <div class="wallet-input-group">
+                <div class="input-label">
+                  <span>Destination Wallet Address</span>
+                </div>
+                <div class="input-container">
+                  <input
+                    type="text"
+                    id="walletAddress"
+                    required
+                    placeholder="Enter your wallet address"
+                  />
+                </div>
+                <div class="error-message" id="walletAddressError">
+                  Please enter a wallet address
+                </div>
+                <div class="wallet-warning">
+                  <i class="fas fa-exclamation-circle"></i>
+                  Ensure the wallet address is correct and matches the selected
+                  network
+                </div>
+
+                <button id="confirmButton" class="confirm_btn">Confirm</button>
+              </div>
+            </div>
+
+            <!-- Wrapper for additional fields -->
+
+            <div class="input-group">
+              <div class="input-label">
+                <span>You send</span>
+                <div class="calculation-mode">
+                  <span class="toggle-mode" id="toggleMode"
+                    >Calculate from receive amount</span
+                  >
+                </div>
+              </div>
+              <div class="input-container">
+                <div class="currency-symbol" id="sendSymbol">€</div>
+                <input
+                  type="number"
+                  id="sendAmount"
+                  value=""
+                  min="0"
+                  required
+                />
+              </div>
+              <div class="error-message" id="sendAmountError">
+                Please enter an amount
+              </div>
+            </div>
+
+            <div style="position: relative; height: 1px; margin: 0 0">
+              <div class="swap-icon" id="swapButton">⇅</div>
+            </div>
+
+            <div class="input-group">
+              <div class="input-label">
+                <span>You receive</span>
+              </div>
+              <div class="input-container">
+                <div class="currency-symbol" id="receiveSymbol">USDC</div>
+                <input type="number" id="receiveAmount" min="0" required />
+              </div>
+              <div class="error-message" id="receiveAmountError">
+                Please enter an amount
+              </div>
+            </div>
+
+            <div class="price-info">
+              <div class="price-row">
+                <span>Exchange rate</span>
+                <span id="finalRate">-</span>
+              </div>
+              <div class="price-row">
+                <span>Quote expires in</span>
+                <span id="expiryTimer">25s</span>
+              </div>
+            </div>
+
+            <div class="fee-info">
+              The quote above is your final price with no hidden fees.
+            </div>
+          </div>
+
+          <!-- Swap Section (initially hidden) -->
+          <div id="swapSection" style="display: none">
+            <div class="swap-container">
+              <div class="input-group">
+                <div class="input-label">
+                  <span>Swap from</span>
+                </div>
+                <div class="custom-select" id="swapFromAssetSelect">
+                  <div class="select-header">
+                    <span>
+                      <img
+                        src="https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png"
+                        class="crypto-icon"
+                        width="24"
+                        height="24"
+                      />
+                      USDC
+                    </span>
+                    <i class="fas fa-chevron-down"></i>
+                  </div>
+                  <div class="select-options">
+                    <div class="select-option active" data-value="usdc">
+                      <img
+                        src="https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png"
+                        class="crypto-icon"
+                        width="24"
+                        height="24"
+                      />
+                      USDC
+                    </div>
+                    <div class="select-option" data-value="usdt">
+                      <img
+                        src="https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"
+                        class="crypto-icon"
+                        width="24"
+                        height="24"
+                      />
+                      USDT
+                    </div>
+                    <div class="select-option" data-value="eth">
+                      <img
+                        src="https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"
+                        class="crypto-icon"
+                        width="24"
+                        height="24"
+                      />
+                      ETH
+                    </div>
+                    <div class="select-option" data-value="eurc">
+                      <img
+                        src="https://s2.coinmarketcap.com/static/img/coins/64x64/20641.png"
+                        class="crypto-icon"
+                        width="24"
+                        height="24"
+                      />
+                      EURC
+                    </div>
+                  </div>
+                </div>
+                <div class="error-message" id="swapFromAssetError">
+                  Please select an asset
+                </div>
+              </div>
+
+              <div class="swap-direction">
+                <div class="swap-arrow">↓</div>
+                <span>Convert to</span>
+                <div class="swap-arrow">↓</div>
+              </div>
+
+              <div class="input-group">
+                <div class="input-label">
+                  <span>Swap to</span>
+                </div>
+                <div class="custom-select" id="swapToAssetSelect">
+                  <div class="select-header">
+                    <span>
+                      <img
+                        src="https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"
+                        class="crypto-icon"
+                        width="24"
+                        height="24"
+                      />
+                      USDT
+                    </span>
+                    <i class="fas fa-chevron-down"></i>
+                  </div>
+                  <div class="select-options">
+                    <div class="select-option active" data-value="usdt">
+                      <img
+                        src="https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"
+                        class="crypto-icon"
+                        width="24"
+                        height="24"
+                      />
+                      USDT
+                    </div>
+                    <div class="select-option" data-value="usdc">
+                      <img
+                        src="https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png"
+                        class="crypto-icon"
+                        width="24"
+                        height="24"
+                      />
+                      USDC
+                    </div>
+                    <div class="select-option" data-value="eth">
+                      <img
+                        src="https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"
+                        class="crypto-icon"
+                        width="24"
+                        height="24"
+                      />
+                      ETH
+                    </div>
+                    <div class="select-option" data-value="eurc">
+                      <img
+                        src="https://s2.coinmarketcap.com/static/img/coins/64x64/20641.png"
+                        class="crypto-icon"
+                        width="24"
+                        height="24"
+                      />
+                      EURC
+                    </div>
+                  </div>
+                </div>
+                <div class="error-message" id="swapToAssetError">
+                  Please select an asset
+                </div>
+              </div>
+            </div>
+
+            <!-- Wrapper for swap additional fields -->
+            <div id="swapAdditionalFields" class="swap-additional-fields">
+              <div class="network-selector">
+                <div class="custom-select" id="swapNetworkSelect">
+                  <div class="input-label">
+                    <span>Network</span>
+                  </div>
+                  <div class="select-header">
+                    <span>
+                      <i class="fab fa-ethereum"></i>
+                      Ethereum
+                    </span>
+                    <i class="fas fa-chevron-down"></i>
+                  </div>
+                  <div class="select-options">
+                    <div class="select-option active" data-value="ethereum">
+                      <i class="fab fa-ethereum"></i>
+                      Ethereum
+                    </div>
+                    <div class="select-option" data-value="polygon">
+                      <i class="fas fa-layer-group"></i>
+                      Polygon
+                    </div>
+                    <div class="select-option" data-value="bsc">
+                      <i class="fas fa-link"></i>
+                      Binance Smart Chain
+                    </div>
+                    <div class="select-option" data-value="solana">
+                      <i class="fas fa-bolt"></i>
+                      Solana
+                    </div>
+                  </div>
+                  <div class="error-message" id="swapNetworkError">
+                    Please select a network
+                  </div>
+                </div>
+              </div>
+
+              <div class="wallet-input-group">
+                <div class="input-label">
+                  <span>Destination Wallet Address</span>
+                </div>
+                <div class="input-container">
+                  <input
+                    type="text"
+                    id="swapWalletAddress"
+                    required
+                    placeholder="Enter your wallet address"
+                  />
+                </div>
+                <div class="error-message" id="swapWalletAddressError">
+                  Please enter a wallet address
+                </div>
+                <div class="wallet-warning">
+                  <i class="fas fa-exclamation-circle"></i>
+                  Ensure the wallet address is correct and matches the selected
+                  network
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <div class="input-label">
+                <span>Amount to swap</span>
+                <div class="calculation-mode">
+                  <span class="toggle-mode" id="swapToggleMode"
+                    >Calculate from receive amount</span
+                  >
+                </div>
+              </div>
+              <div class="input-container">
+                <div class="currency-symbol" id="swapFromSymbol">USDC</div>
+                <input
+                  type="number"
+                  id="swapAmount"
+                  value=""
+                  min="0"
+                  required
+                />
+              </div>
+              <div class="error-message" id="swapAmountError">
+                Please enter an amount
+              </div>
+            </div>
+
+            <div class="input-group">
+              <div class="input-label">
+                <span>You will receive</span>
+              </div>
+              <div class="input-container">
+                <div class="currency-symbol" id="swapToSymbol">USDT</div>
+                <input type="number" id="swapReceiveAmount" min="0" required />
+              </div>
+              <div class="error-message" id="swapReceiveAmountError">
+                Please enter an amount
+              </div>
+            </div>
+
+            <div class="price-info">
+              <div class="price-row">
+                <span>Exchange rate</span>
+                <span id="swapFinalRate">-</span>
+              </div>
+              <div class="price-row">
+                <span>Quote expires in</span>
+                <span id="swapExpiryTimer">25s</span>
+              </div>
+            </div>
+
+            <div class="swap-rate-info">
+              Swap rate includes a 0.5% fee. Actual rate may vary based on
+              market conditions.
+            </div>
+          </div>
+
+          <div class="terms">
+            <div class="terms-checkbox">
+              <input type="checkbox" id="termsCheckbox" required />
+              <label class="checkbox-label" for="termsCheckbox"
+                >I have read and agreed to the
+                <a href="/pages/terms_&_policies.html"
+                  >Terms and Conditions, AML/CTF and Privacy Policy</a
+                ></label
+              >
+            </div>
+            <div class="error-message" id="termsError">
+              Please accept the terms and conditions to continue
+            </div>
+          </div>
+
+          <button id="actionButton">Buy USDC</button>
+
+          <div class="security">
+            Secured by <span class="security-badge">Axion Exchange</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Management Section -->
+      <div class="profile-section" id="profileSection">
+        <div class="card-header">
+          <button class="back-button" id="profileBackButton">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <div class="user-name">Profile</div>
+          <div style="width: 40px"></div>
+          <!-- Spacer for alignment -->
+        </div>
+
+        <div class="profile-header">
+          <div class="profile-pic">JS</div>
+          <div class="profile-info">
+            <div class="profile-name">John Smith</div>
+            <div class="profile-id">
+              ID: AX-789456123
+              <div class="verification-badge verified">
+                <i class="fas fa-shield-alt"></i>
+                Verified
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-details">
+          <div class="detail-card">
+            <div class="detail-label">
+              <i class="fas fa-envelope"></i>
+              Email
+            </div>
+            <div class="detail-value">john.smith@example.com</div>
+          </div>
+          <div class="detail-card">
+            <div class="detail-label">
+              <i class="fas fa-calendar-alt"></i>
+              Sign Up Date
+            </div>
+            <div class="detail-value">March 15, 2023</div>
+          </div>
+          <div class="detail-card">
+            <div class="detail-label">
+              <i class="fas fa-shield-alt"></i>
+              Verification level
+            </div>
+            <div class="detail-value">KYC plus</div>
+          </div>
+          <div class="detail-card">
+            <div class="detail-label">
+              <i class="fas fa-clock"></i>
+              Last Login
+            </div>
+            <div class="detail-value">Today, 14:32</div>
+          </div>
+        </div>
+
+        <div class="profile-tabs">
+          <div class="profile-tab active" data-tab="overview">
+            <i class="fas fa-user-circle"></i>
+            <span>Profile</span>
+          </div>
+          <div class="profile-tab" data-tab="transaction">
+            <i class="fas fa-exchange-alt"></i>
+            <span>Transactions</span>
+          </div>
+          <div class="profile-tab" data-tab="details">
+            <i class="fas fa-user-edit"></i>
+            <span>Personal Details</span>
+          </div>
+          <div class="profile-tab" data-tab="payments">
+            <i class="fas fa-credit-card"></i>
+            <span>Payment Methods</span>
+          </div>
+          <div class="profile-tab" data-tab="security">
+            <i class="fas fa-shield-alt"></i>
+            <span>Security</span>
+          </div>
+        </div>
+
+        <div class="profile-content">
+          <!-- Account Overview -->
+          <div class="tab-content active" id="overviewContent">
+            <div class="section-title">Account Overview</div>
+
+            <div class="account-card">
+              <div class="card-title">
+                <i class="fas fa-user-check"></i>
+                Account Status
+              </div>
+              <div class="status-item">
+                <i class="fas fa-check-circle"></i>
+                <div class="status-text">Active Account</div>
+              </div>
+              <div
+                class="status-text"
+                style="padding-left: 28px; margin-bottom: 12px"
+              >
+                Your account is fully operational
+              </div>
+            </div>
+
+            <div class="account-card">
+              <div class="card-title">
+                <i class="fas fa-badge-check"></i>
+                Verification Level
+              </div>
+              <div class="status-item">
+                <i class="fas fa-star"></i>
+                <div class="status-text">Level 3 (Highest)</div>
+              </div>
+              <div
+                class="status-text"
+                style="padding-left: 28px; margin-bottom: 12px"
+              >
+                Full trading access enabled
+              </div>
+            </div>
+
+            <div class="account-card">
+              <div class="card-title">
+                <i class="fas fa-sign-out-alt"></i>
+                Log Out
+              </div>
+              <div class="status-text" style="margin-bottom: 12px">
+                Sign out of your account
+              </div>
+              <div class="status-link" id="logoutButton">Log Out</div>
+            </div>
+          </div>
+
+          <!-- Transaction History -->
+          <div class="tab-content" id="transactionContent">
+            <div class="section-title">Transaction History</div>
+
+            <div class="transaction">
+              <div class="transaction-header">
+                <div class="transaction-type">
+                  <i class="fas fa-exchange-alt"></i>
+                  Buy Order
+                </div>
+                <div class="transaction-date">Aug 5, 2023</div>
+              </div>
+              <div class="transaction-details">
+                <div class="transaction-amount">€500 → 520 USDC</div>
+                <div class="transaction-status status-completed">Completed</div>
+              </div>
+              <div class="transaction-id">Order #AX-23456789</div>
+            </div>
+
+            <div class="transaction">
+              <div class="transaction-header">
+                <div class="transaction-type">
+                  <i class="fas fa-exchange-alt"></i>
+                  Swap Order
+                </div>
+                <div class="transaction-date">Aug 3, 2023</div>
+              </div>
+              <div class="transaction-details">
+                <div class="transaction-amount">500 USDC → 495 USDT</div>
+                <div class="transaction-status status-completed">Completed</div>
+              </div>
+              <div class="transaction-id">Order #AX-98765432</div>
+            </div>
+
+            <div class="transaction">
+              <div class="transaction-header">
+                <div class="transaction-type">
+                  <i class="fas fa-exchange-alt"></i>
+                  Sell Order
+                </div>
+                <div class="transaction-date">Jul 28, 2023</div>
+              </div>
+              <div class="transaction-details">
+                <div class="transaction-amount">0.25 ETH → €425</div>
+                <div class="transaction-status status-pending">Processing</div>
+              </div>
+              <div class="transaction-id">Order #AX-12345678</div>
+            </div>
+
+            <div class="support-note">
+              <i class="fas fa-info-circle"></i>
+              If you'd like to reques further info about any orders, please
+              contact us at
+              <a href="mailto:support@axionexchange.io"
+                >support@axionexchange.io</a
+              >
+            </div>
+          </div>
+
+          <!-- Personal Details -->
+          <div class="tab-content" id="detailsContent">
+            <div class="section-title">Personal Details</div>
+
+            <div class="detail-row">
+              <div class="detail-title">
+                <i class="fas fa-user"></i>
+                Full Name
+              </div>
+              <div class="detail-content">John Smith</div>
+            </div>
+
+            <div class="detail-row">
+              <div class="detail-title">
+                <i class="fas fa-map-marker-alt"></i>
+                Address
+              </div>
+              <div class="detail-content">123 Main Street, London, UK</div>
+            </div>
+
+            <div class="detail-row">
+              <div class="detail-title">
+                <i class="fas fa-phone"></i>
+                Phone Number
+              </div>
+              <div class="detail-content">+44 7123 456789</div>
+            </div>
+
+            <div class="detail-row">
+              <div class="detail-title">
+                <i class="fas fa-globe"></i>
+                Region
+              </div>
+              <div class="detail-content">United Kingdom</div>
+            </div>
+          </div>
+
+          <!-- Payment Methods -->
+          <div class="tab-content" id="paymentsContent">
+            <div class="section-title">Payment Methods</div>
+            <div class="payment-method">
+              <div class="payment-icon">
+                <i class="fas fa-university"></i>
+              </div>
+              <div class="payment-info">
+                <div class="payment-type">Bank Account</div>
+                <div class="payment-details">
+                  IBAN: GB29 NWBK 6016 1331 9268 19
+                </div>
+              </div>
+            </div>
+
+            <div class="payment-method">
+              <div class="payment-icon">
+                <i class="fab fa-bitcoin"></i>
+              </div>
+              <div class="payment-info">
+                <div class="payment-type">Bitcoin Wallet</div>
+                <div class="payment-details">
+                  bc1qar0srrr7xfkvy5l643lydnw...
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security -->
+          <div class="tab-content" id="securityContent">
+            <div class="section-title">Security Settings</div>
+
+            <div class="security-option">
+              <div class="security-icon">
+                <i class="fas fa-lock"></i>
+              </div>
+              <div class="security-info">
+                <div class="security-title">Password</div>
+                <div class="security-description">
+                  Last changed 3 months ago
+                </div>
+                <div class="security-action" id="resetPassword">
+                  Reset Password
+                </div>
+              </div>
+            </div>
+
+            <div class="security-option">
+              <div class="security-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="security-info">
+                <div class="security-title">Email Address</div>
+                <div class="security-description">john.smith@example.com</div>
+                <div class="security-action" id="changeEmail">Change Email</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <div class="modal" id="logoutModal">
+      <div class="modal-content">
+        <div class="modal-title">Confirm Logout</div>
+        <div class="modal-text">
+          Are you sure you want to log out of your account? You will need to
+          sign in again to access your account.
+        </div>
+        <div class="modal-actions">
+          <button class="modal-button modal-cancel" id="cancelLogout">
+            Cancel
+          </button>
+          <button class="modal-button modal-confirm" id="confirmLogout">
+            Log Out
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
