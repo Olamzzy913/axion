@@ -103,6 +103,7 @@ const CryptoExchange = (() => {
     receiveAmount: document.getElementById("receiveAmount"),
     finalRateEl: document.getElementById("finalRate"),
     expiryTimerEl: document.getElementById("expiryTimer"),
+    closeNetworkModel: document.getElementById("closeNetworkModel"),
     confirmButton: document.getElementById("confirmButton"),
     actionButton: document.getElementById("actionButton"),
     sendSymbol: document.getElementById("sendSymbol"),
@@ -129,7 +130,9 @@ const CryptoExchange = (() => {
 
     // Profile elements
     loginModel: document.getElementById("loginModel"),
+    closeProfileModel: document.getElementById("closeProfileModel"),
     profileIcon: document.getElementById("profileIcon"),
+    closeOverlay: document.getElementById("closeOverlay"),
     profileSection: document.getElementById("profileSection"),
     exchangeWidget: document.getElementById("exchangeWidget"),
     profileBackButton: document.getElementById("profileBackButton"),
@@ -157,7 +160,7 @@ const CryptoExchange = (() => {
     swapToAssetError: document.getElementById("swapToAssetError"),
   };
 
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   // Initialize the widget
   function init() {
@@ -186,12 +189,26 @@ const CryptoExchange = (() => {
     document.querySelectorAll(".custom-select").forEach((select) => {
       const header = select.querySelector(".select-header");
       const options = select.querySelector(".select-options");
+
       document.querySelector(".overlay-backdrop").style.display = "none";
 
       header.addEventListener("click", () => {
         const isOpen = select.classList.contains("open");
+
         document.querySelectorAll(".custom-select").forEach((s) => {
           s.classList.remove("open");
+          options.addEventListener("click", function (event) {
+            if (
+              event.target.id === "closeModel" ||
+              event.target.classList.contains("close") ||
+              event.target.closest("#closeModel") ||
+              event.target.closest(".close")
+            ) {
+              s.classList.remove("open");
+              document.querySelector(".overlay-backdrop").style.display =
+                "none";
+            }
+          });
         });
 
         if (!isOpen) {
@@ -352,6 +369,12 @@ const CryptoExchange = (() => {
       updateAdditionalFields();
     });
 
+    DOM.closeNetworkModel.addEventListener("click", () => {
+      DOM.buySellAdditionalFields.classList.remove("show");
+      document.querySelector(".network-overlay-backdrop").style.display =
+        "none";
+    });
+
     DOM.confirmButton.addEventListener("click", () => {
       DOM.buySellAdditionalFields.classList.remove("show");
       document.querySelector(".network-overlay-backdrop").style.display =
@@ -410,6 +433,11 @@ const CryptoExchange = (() => {
 
   // Toggle profile view
   function toggleProfile() {
+    DOM.closeProfileModel.addEventListener("click", () => {
+      DOM.loginModel.classList.remove("open");
+      document.querySelector(".login-overlay-backdrop").style.display = "none";
+    });
+
     if (isLoggedIn) {
       state.profileActive = !state.profileActive;
       if (state.profileActive) {
@@ -438,7 +466,11 @@ const CryptoExchange = (() => {
 
     // Hide all tab contents
     DOM.tabContents.forEach((content) => content.classList.remove("active"));
-
+    DOM.closeOverlay.addEventListener("click", () => {
+      content.classList.remove("open");
+      document.querySelector(".profile-overlay-backdrop").style.display =
+        "none";
+    });
     // Show selected tab content
     document.getElementById(`${tabId}Content`).classList.add("active");
     const content = document.querySelector(".profile-content");
@@ -909,7 +941,16 @@ const CryptoExchange = (() => {
   }
 
   // Check conditions for showing additional fields
+  let isUserTyping = false;
+  let typingTimeout = null;
+  const TYPING_DELAY = 500; // 500ms after user stops typing
+
   function checkBuySellConditions() {
+    // If user is currently typing, return false immediately
+    if (isUserTyping) {
+      return false;
+    }
+
     return (
       state.currentFiat &&
       state.currentCrypto &&
@@ -917,6 +958,59 @@ const CryptoExchange = (() => {
         parseFloat(DOM.receiveAmount.value) > 0)
     );
   }
+
+  // Add event listeners to track typing
+  function setupInputListeners() {
+    const inputs = [DOM.sendAmount, DOM.receiveAmount];
+
+    inputs.forEach((input) => {
+      if (input) {
+        input.addEventListener("focus", handleInputFocus);
+        input.addEventListener("input", handleInputTyping);
+        input.addEventListener("blur", handleInputBlur);
+      }
+    });
+  }
+
+  function handleInputFocus() {
+    isUserTyping = true;
+  }
+
+  function handleInputTyping() {
+    // Reset the typing flag and timeout
+    isUserTyping = true;
+
+    // Clear any existing timeout
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
+    }
+
+    // Set new timeout to mark when user stops typing
+    typingTimeout = setTimeout(() => {
+      isUserTyping = false;
+      // Optional: trigger any UI updates that depend on the final value
+      onUserFinishedTyping();
+    }, TYPING_DELAY);
+  }
+
+  function handleInputBlur() {
+    // User left the input field, consider typing finished
+    isUserTyping = false;
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
+    }
+    onUserFinishedTyping();
+  }
+
+  function onUserFinishedTyping() {
+    // This is called when user stops typing or leaves the field
+    const shouldShowOverlay = checkBuySellConditions();
+    // Update the additional fields based on the final state
+    updateAdditionalFields();
+  }
+
+  // Initialize the listeners
+  setupInputListeners();
 
   function checkSwapConditions() {
     return (
@@ -928,9 +1022,10 @@ const CryptoExchange = (() => {
   }
 
   // Update additional fields visibility
-  function updateAdditionalFields() {
+  async function updateAdditionalFields() {
     // For buy/sell section
     const buySellConditionsMet = checkBuySellConditions();
+
     if (buySellConditionsMet && !state.showBuySellAdditionalFields) {
       state.showBuySellAdditionalFields = true;
       DOM.buySellAdditionalFields.classList.add("show");

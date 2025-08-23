@@ -147,7 +147,7 @@ body {
 
 .login-overlay-backdrop {
   position: fixed;
-  top: 80px;
+  top: 74px;
   bottom: 0px;
   width: 440px;
   height: 586px;
@@ -291,19 +291,19 @@ body {
 
 /* Container for the bottom overlay */
 .select-options {
-  position: absolute;
-  bottom: 440px;
   left: 0;
-  overflow: hidden;
-  background: white;
-  z-index: 1000;
+  bottom: 0;
   width: 440px;
   height: 440px;
-  display: none;
-  max-height: 70vh;
   overflow-y: auto;
-  padding: 16px;
+  position: absolute;
+  background: white;
+  max-height: 70vh;
+  overflow: hidden;
+  overflow-y: auto;
   transform: translateY(100%);
+  padding: 16px;
+  z-index: 1000;
   border-radius: 16px 16px 0 0;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
@@ -348,7 +348,7 @@ body {
 /* Backdrop overlay */
 .overlay-backdrop {
   position: fixed;
-  top: 80px;
+  top: 74px;
   bottom: 0px;
   width: 440px;
   height: 586px;
@@ -364,7 +364,7 @@ body {
 
 .network-overlay-backdrop {
   position: fixed;
-  top: 80px;
+  top: 74px;
   bottom: 0px;
   width: 440px;
   height: 586px;
@@ -380,7 +380,7 @@ body {
 
 .profile-overlay-backdrop {
   position: fixed;
-  top: 80px;
+  top: 74px;
   bottom: 0px;
   width: 440px;
   height: 586px;
@@ -634,6 +634,7 @@ body {
   position: fixed;
   right: 12px;
   top: 14px;
+  cursor: pointer;
   font-size: 14px;
 }
 
@@ -834,7 +835,8 @@ body {
 .security-option {
   display: flex;
   align-items: center;
-  padding: 16px 0;
+  padding: 18px 0;
+
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -938,7 +940,7 @@ body {
 /* Existing widget styles remain below */
 .input-group {
   margin: 0 0 2px;
-  position: relative;
+  /* position: relative; */
   transition: ease-in-out 1s;
 }
 
@@ -1185,22 +1187,25 @@ body > div.card > div.terms > label > a {
 }
 
 .custom-select.open .select-options {
-  display: block;
+  transform: translateY(0);
 }
 
 /* New styles for animated fields */
 .additional-fields {
-  height: 0;
-  /* opacity: 0; */
   left: 0;
-  bottom: -400px;
+  bottom: 0;
+  width: 440px;
+  height: 440px;
   position: absolute;
-  padding: 16px 16px 0 16px;
+  background: white;
+  max-height: 70vh;
+  overflow: hidden;
+  transform: translateY(100%);
+  padding: 16px;
   z-index: 1000;
   border-radius: 16px 16px 0 0;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
-  transition: max-height 1s ease, opacity 1s ease;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
 .confirm_btn {
@@ -1208,13 +1213,7 @@ body > div.card > div.terms > label > a {
 }
 
 .additional-fields.show {
-  height: 440px;
-  bottom: -10px;
-  /* height: 100%; */
-  /* bottom: 440px; */
-  /* opacity: 1; */
-  background: white;
-  width: 440px;
+  transform: translateY(0);
 }
 
 .additional-fields::before {
@@ -1239,4 +1238,18 @@ body > div.card > div.terms > label > a {
 .swap-additional-fields.show {
   max-height: 500px;
   opacity: 1;
+}
+
+@media only screen and (max-width: 1440px) {
+  .disclaimer {
+    font-size: 13px;
+  }
+
+  .tabs {
+    margin: 0 20px 20px;
+  }
+
+  .tab {
+    padding: 14px;
+  }
 }
