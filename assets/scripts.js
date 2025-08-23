@@ -166,10 +166,6 @@ const CryptoExchange = (() => {
     updateAdditionalFields();
   }
 
-  DOM.confirmButton.addEventListener("click", () => {
-    DOM.buySellAdditionalFields.classList.remove("show");
-    document.querySelector(".overlay-backdrop").style.display = "none";
-  });
   // Initialize custom select components
   function initCustomSelects() {
     // Add click handlers to all custom selects
@@ -262,8 +258,8 @@ const CryptoExchange = (() => {
       if (!e.target.closest(".custom-select")) {
         document.querySelectorAll(".custom-select").forEach((select) => {
           select.classList.remove("open");
-          // DOM.buySellAdditionalFields.classList.remove("show");
-          // document.querySelector(".overlay-backdrop").style.display = "none";
+
+          document.querySelector(".overlay-backdrop").style.display = "none";
         });
       }
     });
@@ -334,6 +330,12 @@ const CryptoExchange = (() => {
     DOM.swapReceiveAmount.addEventListener("input", () => {
       handleSwapInputChange("receive");
       updateAdditionalFields();
+    });
+
+    DOM.confirmButton.addEventListener("click", () => {
+      DOM.buySellAdditionalFields.classList.remove("show");
+      document.querySelector(".network-overlay-backdrop").style.display =
+        "none";
     });
 
     // Calculation mode toggles
@@ -474,7 +476,8 @@ const CryptoExchange = (() => {
     if (DOM.walletAddress.value.trim() === "") {
       DOM.walletAddressError.style.display = "block";
       DOM.buySellAdditionalFields.classList.add("show");
-      document.querySelector(".overlay-backdrop").style.display = "block";
+      document.querySelector(".network-overlay-backdrop").style.display =
+        "block";
     } else {
       DOM.walletAddressError.style.display = "none";
     }
@@ -517,7 +520,8 @@ const CryptoExchange = (() => {
       if (DOM.walletAddress.value.trim() === "") {
         DOM.walletAddressError.style.display = "block";
         DOM.buySellAdditionalFields.classList.add("show");
-        document.querySelector(".overlay-backdrop").style.display = "block";
+        document.querySelector(".network-overlay-backdrop").style.display =
+          "block";
         isValid = false;
       }
     } else {
@@ -894,11 +898,13 @@ const CryptoExchange = (() => {
     if (buySellConditionsMet && !state.showBuySellAdditionalFields) {
       state.showBuySellAdditionalFields = true;
       DOM.buySellAdditionalFields.classList.add("show");
-      document.querySelector(".overlay-backdrop").style.display = "block";
+      document.querySelector(".network-overlay-backdrop").style.display =
+        "block";
     } else if (!buySellConditionsMet && state.showBuySellAdditionalFields) {
       state.showBuySellAdditionalFields = false;
       DOM.buySellAdditionalFields.classList.remove("show");
-      document.querySelector(".overlay-backdrop").style.display = "none";
+      document.querySelector(".network-overlay-backdrop").style.display =
+        "none";
     }
 
     // For swap section
