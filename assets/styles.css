@@ -256,6 +256,22 @@ body {
   border-radius: 12px 16px;
 }
 
+.profile-overlay-backdrop {
+  position: fixed;
+  top: 80px;
+  bottom: 0px;
+  width: 440px;
+  height: 586px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(52, 67, 104, 0.5);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 999;
+  display: none;
+  border-radius: 12px 16px;
+}
+
 .select-option:hover {
   background: #f8f9fa;
 }
@@ -456,38 +472,48 @@ body {
 }
 
 .profile-content {
-  position: absolute;
-  width: 440px;
   height: 440px;
+  width: 440px;
   overflow-y: auto;
-  z-index: 1000;
-  left: 0;
-  display: none;
-  max-height: 70vh;
-  overflow-y: auto;
-  padding: 16px;
-  transform: translateY(100%);
-  border-radius: 16px 16px 0 0;
-}
-
-/* .select-options {
   position: absolute;
-  bottom: 440px;
+  bottom: 0;
   left: 0;
-  overflow: hidden;
   background: white;
-  z-index: 1000;
-  width: 440px;
-  height: 440px;
-  display: none;
   max-height: 70vh;
+  overflow: hidden;
   overflow-y: auto;
-  padding: 16px;
   transform: translateY(100%);
+  padding: 16px;
+  z-index: 1000;
   border-radius: 16px 16px 0 0;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-} */
+}
+
+/* When the overlay is active/visible */
+.profile-content.open {
+  transform: translateY(0);
+}
+
+/* Optional: Add a handle indicator */
+.profile-content::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 4px;
+  background: #ddd;
+  border-radius: 2px;
+}
+
+.close {
+  position: fixed;
+  right: 10px;
+  top: 14px;
+  font-size: 14px;
+}
 
 .tab-content {
   display: none;

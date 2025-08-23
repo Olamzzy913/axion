@@ -159,11 +159,22 @@ const CryptoExchange = (() => {
   // Initialize the widget
   function init() {
     setupEventListeners();
+    utils();
     initCustomSelects();
     updateUI();
     calculatePrice();
     populateUserData();
     updateAdditionalFields();
+  }
+
+  function utils() {
+    const closeModel = document.getElementById("closeModel");
+    closeModel.addEventListener("click", () => {
+      const content = document.querySelector(".profile-content");
+      content.classList.remove("open");
+      document.querySelector(".profile-overlay-backdrop").style.display =
+        "none";
+    });
   }
 
   // Initialize custom select components
@@ -416,6 +427,17 @@ const CryptoExchange = (() => {
 
     // Show selected tab content
     document.getElementById(`${tabId}Content`).classList.add("active");
+    const content = document.querySelector(".profile-content");
+    const isOpen = content.classList.contains("open");
+
+    content.classList.remove("open");
+    document.querySelector(".profile-overlay-backdrop").style.display = "none";
+
+    if (!isOpen) {
+      content.classList.add("open");
+      document.querySelector(".profile-overlay-backdrop").style.display =
+        "block";
+    }
   }
 
   // Event handlers
