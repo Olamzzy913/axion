@@ -25,13 +25,42 @@
       <div id="exchangeWidget">
         <div class="card-header">
           <div class="user-info">
-            <div class="user-name" id="userName">John Smith</div>
+            <div class="user-name" id="userName"></div>
           </div>
           <div class="profile-icon" id="profileIcon">
             <i class="fas fa-user"></i>
           </div>
         </div>
+        <div class="login-overlay-backdrop"></div>
 
+        <div class="profile-content-login" id="loginModel">
+          <span>Sign In</span>
+
+          <form class="login-container">
+            <input
+              type="text"
+              required
+              placeholder="Enter your email address"
+            />
+            <input type="password" required placeholder="Enter your password" />
+            <button id="SignIn" class="sign_btn">Sign in</button>
+          </form>
+          <div class="login-break">
+            <div class="divider"></div>
+            <p>Or</p>
+            <div class="divider"></div>
+          </div>
+
+          <div class="google">
+            <img
+              src="https://i.pinimg.com/1200x/60/41/99/604199df880fb029291ddd7c382e828b.jpg"
+              class="google-icon"
+              width="32"
+              height="32"
+            />
+            <p>Log in with Google</p>
+          </div>
+        </div>
         <div class="verification-screen">
           <h2>Verification Required</h2>
           <p>

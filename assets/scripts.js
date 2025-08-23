@@ -128,6 +128,7 @@ const CryptoExchange = (() => {
     swapAdditionalFields: document.getElementById("swapAdditionalFields"),
 
     // Profile elements
+    loginModel: document.getElementById("loginModel"),
     profileIcon: document.getElementById("profileIcon"),
     profileSection: document.getElementById("profileSection"),
     exchangeWidget: document.getElementById("exchangeWidget"),
@@ -155,6 +156,8 @@ const CryptoExchange = (() => {
     swapFromAssetError: document.getElementById("swapFromAssetError"),
     swapToAssetError: document.getElementById("swapToAssetError"),
   };
+
+  const isLoggedIn = false;
 
   // Initialize the widget
   function init() {
@@ -312,7 +315,13 @@ const CryptoExchange = (() => {
 
   // Populate user data from the userData object
   function populateUserData() {
-    DOM.userName.textContent = "John Smith";
+    if (isLoggedIn) {
+      DOM.userName.textContent = "John Smith";
+      DOM.profileIcon.classList.add("active");
+    } else {
+      DOM.userName.textContent = "Login";
+      DOM.profileIcon.classList.remove("active");
+    }
   }
 
   // Set up all event listeners
@@ -401,13 +410,18 @@ const CryptoExchange = (() => {
 
   // Toggle profile view
   function toggleProfile() {
-    state.profileActive = !state.profileActive;
-    if (state.profileActive) {
-      DOM.exchangeWidget.style.display = "none";
-      DOM.profileSection.style.display = "block";
+    if (isLoggedIn) {
+      state.profileActive = !state.profileActive;
+      if (state.profileActive) {
+        DOM.exchangeWidget.style.display = "none";
+        DOM.profileSection.style.display = "block";
+      } else {
+        DOM.exchangeWidget.style.display = "block";
+        DOM.profileSection.style.display = "none";
+      }
     } else {
-      DOM.exchangeWidget.style.display = "block";
-      DOM.profileSection.style.display = "none";
+      DOM.loginModel.classList.add("open");
+      document.querySelector(".login-overlay-backdrop").style.display = "block";
     }
   }
 
