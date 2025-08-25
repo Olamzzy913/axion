@@ -626,6 +626,7 @@ body {
   position: absolute;
   bottom: 0;
   left: 0;
+  display: none;
   background: white;
   max-height: 70vh;
   overflow: hidden;

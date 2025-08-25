@@ -494,6 +494,14 @@ const CryptoExchange = (() => {
       document.querySelector(".profile-overlay-backdrop").style.display =
         "block";
     }
+
+    //additional contents
+    const isAdditionalModelOpen =
+      DOM.additionalModel.classList.contains("open");
+    const transaction = document.querySelector(".transaction");
+    transaction.addEventListener("click", () => {
+      DOM.additionalModel.classList.add("open");
+    });
   }
 
   // Event handlers
