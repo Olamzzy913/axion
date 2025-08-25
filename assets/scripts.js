@@ -135,7 +135,7 @@ const CryptoExchange = (() => {
     loginModel: document.getElementById("loginModel"),
     closeProfileModel: document.getElementById("closeProfileModel"),
     profileIcon: document.getElementById("profileIcon"),
-    additionalModel: document.getElementById("additionalModel"),
+    additionalModel: document.getElementById("additionalModel"), //closeAdditionalOverlay
     closeAdditionalOverlay: document.getElementById("closeAdditionalOverlay"),
     closeOverlay: document.getElementById("closeOverlay"),
     profileSection: document.getElementById("profileSection"),
@@ -176,6 +176,7 @@ const CryptoExchange = (() => {
     calculatePrice();
     populateUserData();
     updateAdditionalFields();
+    handleAdditionalTabClick();
   }
 
   function utils() {
@@ -427,15 +428,6 @@ const CryptoExchange = (() => {
       DOM.logoutModal.style.display = "none";
     });
 
-    // Security actions
-    DOM.resetPassword.addEventListener("click", () => {
-      alert("Password reset functionality would be implemented here");
-    });
-
-    DOM.changeEmail.addEventListener("click", () => {
-      alert("Email change functionality would be implemented here");
-    });
-
     // Wallet address validation
     DOM.walletAddress.addEventListener("input", validateWalletAddress);
     DOM.swapWalletAddress.addEventListener("input", validateSwapWalletAddress);
@@ -494,13 +486,96 @@ const CryptoExchange = (() => {
       document.querySelector(".profile-overlay-backdrop").style.display =
         "block";
     }
+  }
 
+  function handleAdditionalTabClick() {
     //additional contents
+
+    DOM.closeAdditionalOverlay.addEventListener("click", () => {
+      DOM.additionalModel.classList.remove("open");
+
+      document.querySelector(".additional-overlay").style.display = "none";
+    });
     const isAdditionalModelOpen =
       DOM.additionalModel.classList.contains("open");
-    const transaction = document.querySelector(".transaction");
-    transaction.addEventListener("click", () => {
-      DOM.additionalModel.classList.add("open");
+    // Store the currently active dialog
+    let activeDialog = null;
+
+    // Function to handle dialog activation
+    function activateDialog(tabId) {
+      // Remove active class from any currently active dialog
+      if (activeDialog) {
+        activeDialog.classList.remove("active");
+      }
+
+      // Get the new dialog and activate it
+      const newDialog = document.getElementById(`${tabId}Dialog`);
+      if (newDialog) {
+        newDialog.classList.add("active");
+        activeDialog = newDialog; // Update the active dialog reference
+      }
+    }
+
+    // Add event listeners to transaction elements
+    document.querySelectorAll(".transaction").forEach((selected) => {
+      selected.addEventListener("click", (event) => {
+        const tab = event.currentTarget;
+        const tabId = tab.dataset.tab;
+
+        // Activate the dialog
+        activateDialog(tabId);
+
+        // Your existing code for model management
+        DOM.additionalModel.classList.remove("open");
+        document.querySelector(".additional-overlay").style.display = "none";
+
+        if (!isAdditionalModelOpen) {
+          document.querySelector(".additional-overlay").style.display = "block";
+          DOM.additionalModel.classList.add("open");
+        }
+      });
+    });
+    //security-action
+    // Add event listeners to payment method elements
+    document.querySelectorAll(".payment-method").forEach((selected) => {
+      selected.addEventListener("click", (event) => {
+        const tab = event.currentTarget;
+        const tabId = tab.dataset.tab;
+        console.log(`print ${tabId}`);
+
+        // Activate the dialog
+        activateDialog(tabId);
+
+        // Your existing code for model management
+        DOM.additionalModel.classList.remove("open");
+        document.querySelector(".additional-overlay").style.display = "none";
+
+        if (!isAdditionalModelOpen) {
+          document.querySelector(".additional-overlay").style.display = "block";
+          DOM.additionalModel.classList.add("open");
+        }
+      });
+    });
+
+    // Add event listeners to security action elements
+    document.querySelectorAll(".security-action").forEach((selected) => {
+      selected.addEventListener("click", (event) => {
+        const tab = event.currentTarget;
+        const tabId = tab.dataset.tab;
+        console.log(`print ${tabId}`);
+
+        // Activate the dialog
+        activateDialog(tabId);
+
+        // Your existing code for model management
+        DOM.additionalModel.classList.remove("open");
+        document.querySelector(".additional-overlay").style.display = "none";
+
+        if (!isAdditionalModelOpen) {
+          document.querySelector(".additional-overlay").style.display = "block";
+          DOM.additionalModel.classList.add("open");
+        }
+      });
     });
   }
 

@@ -415,7 +415,7 @@ body {
   background: rgba(52, 67, 104, 0.5);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(5px);
-  z-index: 999;
+  z-index: 1000;
   display: none;
   border-radius: 12px 16px;
 }
@@ -626,7 +626,6 @@ body {
   position: absolute;
   bottom: 0;
   left: 0;
-  display: none;
   background: white;
   max-height: 70vh;
   overflow: hidden;
@@ -668,7 +667,7 @@ body {
   overflow-y: auto;
   transform: translateY(100%);
   padding: 16px;
-  z-index: 1000;
+  z-index: 999;
   border-radius: 16px 16px 0 0;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
@@ -868,6 +867,7 @@ body {
   display: flex;
   align-items: center;
   padding: 12px 0;
+  cursor: pointer;
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -1309,6 +1309,107 @@ body > div.card > div.terms > label > a {
 .swap-additional-fields.show {
   max-height: 500px;
   opacity: 1;
+}
+
+.additonal-tab-content {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.additonal-tab-content.active {
+  display: flex;
+}
+
+.transaction-header {
+  font-size: 16px;
+  margin-top: 10px;
+  font-weight: 500;
+  margin-bottom: 0px;
+}
+
+.transaction-content {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+  padding: 14px 14px;
+  flex-direction: column;
+}
+
+.transaction-detail {
+  border: 2px dashed #e2e8f0;
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.coin span {
+  font-weight: 600;
+  font-size: medium;
+}
+
+.coin-worth {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  flex-direction: column;
+}
+
+.coin-worth span {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.coin-worth p {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.coin-detail {
+  display: flex;
+}
+
+.coin-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.trans-review {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.trans-review p {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.sub-content {
+  display: flex;
+  justify-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 6px 14px;
+}
+
+.sub-content span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #7a7a7a;
+}
+
+.sub-content p {
+  font-size: 14px;
+  font-weight: 500;
+  /* color: #7a7a7a; */
 }
 
 @media only screen and (min-width: 1440px) {
