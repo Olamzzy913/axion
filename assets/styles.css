@@ -121,15 +121,25 @@ body {
   align-items: center;
 }
 
-.profile-content-login span {
-  font-size: 18px;
-  font-weight: 600;
+.profile-login-tabs {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
   margin: 10px 0;
+}
+
+.login-tab {
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.login-tab.active {
+  font-weight: 600;
 }
 
 .profile-content-login p {
   font-size: 16px;
-
   margin: 10px 0;
 }
 
@@ -174,7 +184,7 @@ body {
   overflow-y: auto;
   transform: translateY(100%);
   padding: 16px 32px;
-  z-index: 1000;
+  z-index: 800;
   border-radius: 16px 16px 0 0;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
@@ -389,6 +399,22 @@ body {
   background: rgba(52, 67, 104, 0.5);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(5px);
+  z-index: 899;
+  display: none;
+  border-radius: 12px 16px;
+}
+
+.additional-overlay {
+  position: fixed;
+  top: 74px;
+  bottom: 0px;
+  width: 440px;
+  height: 586px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(52, 67, 104, 0.5);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(5px);
   z-index: 999;
   display: none;
   border-radius: 12px 16px;
@@ -593,6 +619,41 @@ body {
   color: var(--maingreen);
 }
 
+.additional-content {
+  height: 440px;
+  width: 440px;
+  overflow-y: auto;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: white;
+  max-height: 70vh;
+  overflow: hidden;
+  overflow-y: auto;
+  transform: translateY(100%);
+  padding: 16px;
+  z-index: 1000;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.additional-content.open {
+  transform: translateY(0);
+}
+
+.additional-content::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 4px;
+  background: #ddd;
+  border-radius: 2px;
+}
+
 .profile-content {
   height: 440px;
   width: 440px;
@@ -636,6 +697,14 @@ body {
   top: 14px;
   cursor: pointer;
   font-size: 14px;
+}
+
+.fa-xmark {
+  position: fixed;
+  right: 16px;
+  top: 16px;
+  cursor: pointer;
+  font-size: 18px;
 }
 
 .tab-content {
@@ -700,6 +769,7 @@ body {
 
 /* Transaction Styles */
 .transaction {
+  cursor: pointer;
   border-bottom: 1px solid var(--border-color);
   padding: 12px 0;
 }
@@ -888,7 +958,7 @@ body {
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 100;
+  z-index: 1000;
   justify-content: center;
   align-items: center;
 }
@@ -1240,7 +1310,7 @@ body > div.card > div.terms > label > a {
   opacity: 1;
 }
 
-@media only screen and (max-width: 1440px) {
+@media only screen and (min-width: 1440px) {
   .disclaimer {
     font-size: 13px;
   }

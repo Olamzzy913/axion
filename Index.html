@@ -35,9 +35,12 @@
 
         <div class="profile-content-login" id="loginModel">
           <i id="closeProfileModel" class="fas fa-x close"></i>
-          <span>Sign In</span>
+          <div class="profile-login-tabs">
+            <div class="login-tab active" data-type="signin">Sign In</div>
+            <div class="login-tab" data-type="signup">Sign Up</div>
+          </div>
 
-          <form class="login-container">
+          <form id="signIn" class="login-container">
             <input
               type="text"
               required
@@ -45,6 +48,16 @@
             />
             <input type="password" required placeholder="Enter your password" />
             <button id="SignIn" class="sign_btn">Sign in</button>
+          </form>
+          <form id="signUp" class="login-container" style="display: none">
+            <input type="text" required placeholder="Enter your full name" />
+            <input
+              type="text"
+              required
+              placeholder="Enter your email address"
+            />
+            <input type="password" required placeholder="Enter your password" />
+            <button id="SignIn" class="sign_btn">Sign Up</button>
           </form>
           <div class="login-break">
             <div class="divider"></div>
@@ -712,7 +725,8 @@
         <div class="profile-overlay-backdrop"></div>
 
         <div class="profile-content">
-          <i id="closeOverlay" class="fas fa-x close"></i>
+          <i id="closeOverlay" class="fa-solid fa-xmark"></i>
+
           <!-- Account Overview -->
           <div class="tab-content" id="overviewContent">
             <div class="section-title">Account Overview</div>
@@ -918,6 +932,38 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="additional-overlay"></div>
+
+    <div class="additional-content" id="additionalModel">
+      <i id="closeAdditionalOverlay" class="fas fa-x close"></i>
+      <div class="profile-login-tabs">
+        <div class="login-tab active" data-type="signin">Sign In</div>
+        <div class="login-tab" data-type="signup">Sign Up</div>
+      </div>
+
+      <form id="signUp" class="login-container" style="display: none">
+        <input type="text" required placeholder="Enter your full name" />
+        <input type="text" required placeholder="Enter your email address" />
+        <input type="password" required placeholder="Enter your password" />
+        <button id="SignIn" class="sign_btn">Sign Up</button>
+      </form>
+      <div class="login-break">
+        <div class="divider"></div>
+        <p>Or</p>
+        <div class="divider"></div>
+      </div>
+
+      <div class="google">
+        <img
+          src="https://i.pinimg.com/1200x/60/41/99/604199df880fb029291ddd7c382e828b.jpg"
+          class="google-icon"
+          width="32"
+          height="32"
+        />
+        <p>Log in with Google</p>
       </div>
     </div>
 

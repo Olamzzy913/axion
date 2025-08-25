@@ -71,6 +71,7 @@ const CryptoExchange = (() => {
 
   // State management
   const state = {
+    authType: "signin",
     transactionType: "buy",
     currentFiat: "eur",
     currentCrypto: "usdc",
@@ -129,9 +130,13 @@ const CryptoExchange = (() => {
     swapAdditionalFields: document.getElementById("swapAdditionalFields"),
 
     // Profile elements
+    signIn: document.getElementById("signIn"),
+    signUp: document.getElementById("signUp"),
     loginModel: document.getElementById("loginModel"),
     closeProfileModel: document.getElementById("closeProfileModel"),
     profileIcon: document.getElementById("profileIcon"),
+    additionalModel: document.getElementById("additionalModel"),
+    closeAdditionalOverlay: document.getElementById("closeAdditionalOverlay"),
     closeOverlay: document.getElementById("closeOverlay"),
     profileSection: document.getElementById("profileSection"),
     exchangeWidget: document.getElementById("exchangeWidget"),
@@ -343,6 +348,11 @@ const CryptoExchange = (() => {
 
   // Set up all event listeners
   function setupEventListeners() {
+    // auth switching
+    document.querySelectorAll(".login-tab").forEach((tab) => {
+      tab.addEventListener("click", handleAuthClick);
+    });
+
     // Tab switching
     document.querySelectorAll(".tab").forEach((tab) => {
       tab.addEventListener("click", handleTabClick);
@@ -483,6 +493,22 @@ const CryptoExchange = (() => {
       content.classList.add("open");
       document.querySelector(".profile-overlay-backdrop").style.display =
         "block";
+    }
+  }
+
+  // Event handlers
+  function handleAuthClick(event) {
+    document
+      .querySelectorAll(".login-tab")
+      .forEach((t) => t.classList.remove("active"));
+    event.target.classList.add("active");
+    state.authType = event.target.dataset.type;
+    if (state.authType === "signin") {
+      DOM.signIn.style.display = "block";
+      DOM.signUp.style.display = "none";
+    } else {
+      DOM.signIn.style.display = "none";
+      DOM.signUp.style.display = "block";
     }
   }
 
