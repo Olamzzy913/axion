@@ -876,7 +876,7 @@
           <!-- Payment Methods -->
           <div class="tab-content" id="paymentsContent">
             <div class="section-title">Payment Methods</div>
-            <div class="payment-method" data-tab="payment">
+            <div class="payment-method" data-tab="payment" data-method="bank">
               <div class="payment-icon">
                 <i class="fas fa-university"></i>
               </div>
@@ -888,7 +888,7 @@
               </div>
             </div>
 
-            <div class="payment-method" data-tab="payment">
+            <div class="payment-method" data-tab="payment" data-method="wallet">
               <div class="payment-icon">
                 <i class="fab fa-bitcoin"></i>
               </div>
@@ -916,6 +916,7 @@
                 </div>
                 <div
                   data-tab="security"
+                  data-method="password"
                   class="security-action"
                   id="resetPassword"
                 >
@@ -933,6 +934,7 @@
                 <div class="security-description">john.smith@example.com</div>
                 <div
                   data-tab="security"
+                  data-method="email"
                   class="security-action"
                   id="changeEmail"
                 >
@@ -949,8 +951,8 @@
       <div class="additional-content" id="additionalModel">
         <i id="closeAdditionalOverlay" class="fa-solid fa-xmark"></i>
         <div class="additonal-tab-content" id="transactDialog">
-          <p class="transaction-header">Transaction Details</p>
-          <div class="transaction-content">
+          <p class="dialog-header">Transaction Details</p>
+          <div class="dialog-content">
             <div class="transaction-detail">
               <div class="trans-header">
                 <div class="content">
@@ -1007,10 +1009,70 @@
           </div>
         </div>
         <div class="additonal-tab-content" id="paymentDialog">
-          <p class="transaction-header">Payment Method</p>
+          <p class="dialog-header">Payment Method</p>
+          <div class="dialog-content">
+            <form id="bank" class="payment-container" style="display: none">
+              <input
+                type="number"
+                required
+                placeholder="Enter your account number"
+              />
+              <input
+                type="text"
+                required
+                placeholder="Enter your account name"
+              />
+              <input
+                type="number"
+                required
+                placeholder="Enter your routing number"
+              />
+              <input
+                type="text"
+                required
+                placeholder="Additional details"
+                style="margin-bottom: 4rem"
+              />
+              <button id="bankBtn" class="payment_btn">Continue</button>
+            </form>
+            <form id="wallet" class="payment-container" style="display: none">
+              <input
+                type="text"
+                required
+                placeholder="Enter your wallet address"
+                style="margin-bottom: 15rem"
+              />
+
+              <button id="walletBtn" class="payment_btn">Continue</button>
+            </form>
+          </div>
         </div>
         <div class="additonal-tab-content" id="securityDialog">
-          <p class="transaction-header">Security</p>
+          <p class="dialog-header">Security</p>
+          <div class="dialog-content">
+            <form id="password" class="payment-container" style="display: none">
+              <input type="text" required placeholder="Current password" />
+              <input type="text" required placeholder="New password" />
+
+              <input
+                type="text"
+                required
+                placeholder="Confirm password"
+                style="margin-bottom: 7.6rem"
+              />
+              <button id="passwordBtn" class="payment_btn">Continue</button>
+            </form>
+            <form id="email" class="payment-container" style="display: none">
+              <input
+                type="text"
+                required
+                placeholder="Enter new email address"
+                style="margin-bottom: 15rem"
+              />
+
+              <button id="emailBtn" class="payment_btn">Continue</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

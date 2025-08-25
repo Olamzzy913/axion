@@ -535,14 +535,20 @@ const CryptoExchange = (() => {
         }
       });
     });
-    //security-action
+
     // Add event listeners to payment method elements
     document.querySelectorAll(".payment-method").forEach((selected) => {
       selected.addEventListener("click", (event) => {
         const tab = event.currentTarget;
         const tabId = tab.dataset.tab;
-        console.log(`print ${tabId}`);
-
+        const method = tab.dataset.method;
+        if (method === "bank") {
+          document.getElementById("bank").style.display = "block";
+          document.getElementById("wallet").style.display = "none";
+        } else if (method === "wallet") {
+          document.getElementById("wallet").style.display = "block";
+          document.getElementById("bank").style.display = "none";
+        }
         // Activate the dialog
         activateDialog(tabId);
 
@@ -562,8 +568,14 @@ const CryptoExchange = (() => {
       selected.addEventListener("click", (event) => {
         const tab = event.currentTarget;
         const tabId = tab.dataset.tab;
-        console.log(`print ${tabId}`);
-
+        const method = tab.dataset.method;
+        if (method === "email") {
+          document.getElementById("email").style.display = "block";
+          document.getElementById("password").style.display = "none";
+        } else if (method === "password") {
+          document.getElementById("password").style.display = "block";
+          document.getElementById("email").style.display = "none";
+        }
         // Activate the dialog
         activateDialog(tabId);
 
